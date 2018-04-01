@@ -2,7 +2,7 @@ class Condtion {
     constructor() {
         this.page = 1;
     }
-    static resolveFromReq(req) {
+    resolveFromReq(req) {
         if (!req.body) {
             console.log("req没有Body");
             let condtion = new Condtion();
@@ -17,28 +17,28 @@ class Condtion {
             condtion.orderBy = orderBy;
             condtion.orderDir = orderDir;
             condtion.extraInfo = extraInfo;
-            return condition;
+            return condtion;
         }
     };
-    set page(page) {
+    page(page) {
         this.page = page;
     }
-    set timeStart(timeStart) {
+    timeStart(timeStart) {
         this.timeStart = timeStart;
     };
-    set timeEnd(timeEnd) {
+    timeEnd(timeEnd) {
         this.timeEnd = timeEnd;
     };
-    set tokenString(tokenString) {
+    tokenString(tokenString) {
         this.tokenString = tokenString;
     };
-    set orderBy(orderBy) {
+    orderBy(orderBy) {
         this.orderBy = orderBy;
     };
-    set orderDir(orderDir) {
+    orderDir(orderDir) {
         this.orderDir = orderDir;
     };
-    set extraInfo(extraInfo) {
+    extraInfo(extraInfo) {
         this.extraInfo = extraInfo;
     };
 }

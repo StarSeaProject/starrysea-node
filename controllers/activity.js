@@ -4,9 +4,8 @@ const activityService = require("../services/activity");
 const Condition = require("../common/Condition");
 const Activity = require("../dto/Activity");
 activity.get("/", (req, res) => {
-    activityService.queryAllActivityService(Condition.resolveFromReq(req), Activity.resolveFromReq(req));
-    res.status(200);
-    res.send("success");
+    activityService.queryAllActivityService(new Condition().resolveFromReq(req), Activity.resolveFromReq(req));
+    res.status(200).send("success");
 });
 activity.post("/ajax", (req, res) => {
 
@@ -20,16 +19,20 @@ activity.post("/detail/ajax", (req, res) => {
 activity.post("/add", (req, res) => {
 
 });
-activity.post("/modify", (req, res) => {
+activity.patch("/modify", (req, res) => {
 
 });
-activity.post("/remove", (req, res) => {
+activity.delete("/remove", (req, res) => {
 
 });
-activity.post("/funding/add", (req, res) => {
+//@route:/funding
+//@method:PATCH
+activity.patch("/funding/add", (req, res) => {
 
 });
-activity.post("/funding/remove", (req, res) => {
+//@routes:/funding
+//@method:DELETE
+activity.delete("/funding/remove", (req, res) => {
 
 });
 module.exports = activity;
