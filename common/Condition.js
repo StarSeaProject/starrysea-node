@@ -3,22 +3,18 @@ class Condtion {
         this.page = 1;
     }
     resolveFromReq(req) {
-        if (!req.body) {
-            console.log("req没有Body");
-            let condtion = new Condtion();
-            return condtion;
-        } else {
-            let { page, timeStart, timeEnd, tokenString, orderBy, orderDir, extraInfo } = req.body;
-            let condtion = new Condtion();
-            condtion.page = page;
-            condtion.timeStart = timeStart;
-            condtion.timeEnd = timeEnd;
-            condtion.tokenString = tokenString;
-            condtion.orderBy = orderBy;
-            condtion.orderDir = orderDir;
-            condtion.extraInfo = extraInfo;
-            return condtion;
-        }
+        let { page, timeStart, timeEnd, tokenString, orderBy, orderDir, extraInfo } = req.body;
+        let condtion = new Condtion();
+        condtion.page = page;
+        if (condtion.page === undefined)
+            condtion.page = 1;
+        condtion.timeStart = timeStart;
+        condtion.timeEnd = timeEnd;
+        condtion.tokenString = tokenString;
+        condtion.orderBy = orderBy;
+        condtion.orderDir = orderDir;
+        condtion.extraInfo = extraInfo;
+        return condtion;
     };
     page(page) {
         this.page = page;

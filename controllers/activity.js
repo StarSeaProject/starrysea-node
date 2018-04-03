@@ -4,8 +4,9 @@ const activityService = require("../services/activity");
 const Condition = require("../common/Condition");
 const Activity = require("../dto/Activity");
 activity.get("/", (req, res) => {
-    activityService.queryAllActivityService(new Condition().resolveFromReq(req), Activity.resolveFromReq(req));
-    res.status(200).send("success");
+    const result = activityService.queryAllActivityService(new Condition().resolveFromReq(req), Activity.resolveFromReq(req));
+    console.log(result);
+    res.status(200).send(result.getResult("LIST_1"));
 });
 activity.post("/ajax", (req, res) => {
 
