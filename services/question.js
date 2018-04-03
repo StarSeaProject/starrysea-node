@@ -1,13 +1,13 @@
 const question = require("../dao/Question");
-queryAllQuestionService = (condition, question) => {
+let questionService = {
+    queryAllQuestionService: (condition, question, callback) => {
 
-};
-askQuestionService = (question) => {
+    },
+    askQuestionService: (question, callback) => {
 
-};
-answerQuestionService = (question) => {
+    },
+    answerQuestionService: (question, callback) => {
 
-};
-module.exports = queryAllQuestionService;
-module.exports = askQuestionService;
-module.exports = answerQuestionService;
+    }
+}
+module.exports = questionService;

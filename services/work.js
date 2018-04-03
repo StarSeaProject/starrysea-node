@@ -1,25 +1,22 @@
 const work = require("../dao/Work");
-queryAllWorkService = (condition, work) => {
+let workService = {
+    queryAllWorkService: (condition, work, callback) => {
 
-};
-queryWorkService = (work) => {
+    },
+    queryWorkService: (work, callback) => {
 
-};
-addWorkService = (coverFile, imageFiles, work, workTypes) => {
+    },
+    addWorkService: (coverFile, imageFiles, work, workTypes, callback) => {
 
-};
-removeWorkService = (work) => {
+    },
+    removeWorkService: (work, callback) => {
 
-};
-removeWorkTypeService = (workType) => {
+    },
+    removeWorkTypeService: (workType, callback) => {
 
-};
-modifyWorkTypeService = (workType) => {
+    },
+    modifyWorkTypeService: (workType, callback) => {
 
-};
-module.exports = queryAllWorkService;
-module.exports = queryWorkService;
-module.exports = addWorkService;
-module.exports = removeWorkService;
-module.exports = removeWorkTypeService;
-module.exports = modifyWorkTypeService;
+    }
+}
+module.exports = workService;

@@ -11,5 +11,11 @@ class ServiceResult {
     getResult(key) {
         return this.result[key];
     }
+    setNowPage(page) {
+        this.nowPage = page;
+    }
+    setTotalPage(page) {
+        this.totalPage = page;
+    }
 }
 module.exports = ServiceResult;

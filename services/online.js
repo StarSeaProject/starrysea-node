@@ -1,5 +1,7 @@
 const online = require("../dao/Online");
-addMailService = (online) => {
+let onlineService = {
+    addMailService : (online, callback) => {
 
+    }
 }
-module.exports = addMailService;
+module.exports = onlineService;

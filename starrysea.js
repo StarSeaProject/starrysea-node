@@ -3,7 +3,10 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const handlebars = require("express3-handlebars").create({ extname: ".hbs" });
 const starrysea = express();
+starrysea.engine("handlebars", handlebars.engine);
+starrysea.set("view engine", "handlebars");
 //Controller
 const activity = require("./controllers/activity");
 const online = require("./controllers/online");

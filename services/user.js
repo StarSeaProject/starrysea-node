@@ -1,5 +1,7 @@
 const user = require("../dao/User");
-loginService = (admin) => {
+let userService = {
+    loginService = (admin, callback) => {
 
-};
-module.exports = loginService;
+    }
+}
+module.exports = userService;

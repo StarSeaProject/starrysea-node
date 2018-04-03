@@ -1,61 +1,49 @@
 const order = require("../dao/Orders");
-queryAllOrderService = (condition, order) => {
+let orderService = {
+    queryAllOrderService: (condition, order, callback) => {
 
-};
-queryOrderService = (order) => {
+    },
+    queryOrderService: (order, callback) => {
 
-};
-addOrderService = (order, orderDetails) => {
+    },
+    addOrderService: (order, orderDetails, callback) => {
 
-};
-modifyOrderService = (order) => {
+    },
+    modifyOrderService: (order, callback) => {
 
-};
-removeOrderService = (order) => {
+    },
+    removeOrderService: (order, callback) => {
 
-};
-queryAllProvinceService = () => {
+    },
+    queryAllProvinceService: (callback) => {
 
-};
-queryWorkTypeStock = (workTypes) => {
+    },
+    queryWorkTypeStock: (workTypes, callback) => {
 
-};
-exportOrderToXlsService = () => {
+    },
+    exportOrderToXlsService: (callback) => {
 
-};
-resendEmailService = (order) => {
+    },
+    resendEmailService: (order, callback) => {
 
-};
-queryAllWorkTypeForShoppingCarService = (workTypes) => {
+    },
+    queryAllWorkTypeForShoppingCarService: (workTypes, callback) => {
 
-};
-modifyAddressService = (order) => {
+    },
+    modifyAddressService: (order, callback) => {
 
-};
-modifyAddressEmailService = (order) => {
+    },
+    modifyAddressEmailService: (order, callback) => {
 
-};
-queryShoppingCarListService = (redisKey) => {
+    },
+    queryShoppingCarListService: (redisKey, callback) => {
 
-};
-addorModifyWorkToShoppingCarService = (redisKey, orderDetailForAddOrders) => {
+    },
+    addorModifyWorkToShoppingCarService: (redisKey, orderDetailForAddOrders, callback) => {
 
-};
-removeShoppingCarListService = (redisKey) => {
+    },
+    removeShoppingCarListService: (redisKey, callback) => {
 
-};
-module.exports = queryAllOrderService;
-module.exports = queryOrderService;
-module.exports = addOrderService;
-module.exports = modifyOrderService;
-module.exports = removeOrderService;
-module.exports = queryAllProvinceService;
-module.exports = queryWorkTypeStock;
-module.exports = exportOrderToXlsService;
-module.exports = resendEmailService;
-module.exports = queryAllWorkTypeForShoppingCarService;
-module.exports = modifyAddressService;
-module.exports = modifyAddressEmailService;
-module.exports = queryShoppingCarListService;
-module.exports = addorModifyWorkToShoppingCarService;
-module.exports = removeShoppingCarListService;
+    }
+}
+module.exports = orderService;

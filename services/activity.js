@@ -1,43 +1,52 @@
 const Activity = require("../dao/Activity");
 const ServiceResult = require("../common/ServiceResult");
 let activityService = {
-    queryAllActivityService: (condition, activity) => {
+    queryAllActivityService: (condition, activity, callback) => {
         const { page } = condition;
-        var limit = 10;
-        var start = 0;
+        let limit = 10;
+        let start = 0;
         if (page == 1) {
             start = 1;
         } else {
             start = (page - 1) * limit;
         }
-        let sr = new ServiceResult();
         Activity.find({}).exec(["id", "name", "cover", "summary", "endtime"], (err, docs) => {
+            let sr = new ServiceResult();
             if (err) {
                 sr.setSuccessed(false);
             } else {
                 const result = docs.slice(start, parseInt(start) + parseInt(limit));
+                let totalPage = 0;
+                let count = docs.length;
+                if (count % limit === 0)
+                    totalPage = count / limit;
+                else
+                    totalPage = (count / limit) + 1;
                 sr.setSuccessed(true);
+                sr.setResult("ACTIVITY", docs[0]);
                 sr.setResult("LIST_1", result);
+                sr.setNowPage(page);
+                sr.setTotalPage(totalPage);
             }
+            callback(sr);
         });
-        return sr;
     },
-    queryActivityService: (activity) => {
+    queryActivityService: (activity, callback) => {
 
     },
-    addActivityService: (coverFile, activity, activityImages) => {
+    addActivityService: (coverFile, activity, activityImages, callback) => {
 
     },
-    modifyActivityService: (activity) => {
+    modifyActivityService: (activity, callback) => {
 
     },
-    removeActivityService: (activity) => {
+    removeActivityService: (activity, callback) => {
 
     },
-    addFundingService: (fundings) => {
+    addFundingService: (fundings, callback) => {
 
     },
-    removeFundingService: (funding) => {
+    removeFundingService: (funding, callback) => {
 
     }
 }
