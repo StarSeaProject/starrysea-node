@@ -1,34 +1,49 @@
 const Activity = require("../dao/Activity");
 const ServiceResult = require("../common/ServiceResult");
+const CONST = require("../common/Const").ACTIVITY;
+const async = require("async");
 let activityService = {
-    queryAllActivityService: (condition, activity, callback) => {
+    queryAllActivityService: (condition, activity, controller_callback) => {
         const { page } = condition;
-        let limit = 10;
         let start = 0;
         if (page == 1) {
             start = 1;
         } else {
-            start = (page - 1) * limit;
+            start = (page - 1) * CONST.ALL_ACTIVITY_LIMIT;
         }
-        Activity.find({}).exec(["id", "name", "cover", "summary", "endtime"], (err, docs) => {
-            let sr = new ServiceResult();
-            if (err) {
-                sr.setSuccessed(false);
-            } else {
-                const result = docs.slice(start, parseInt(start) + parseInt(limit));
-                let totalPage = 0;
-                let count = docs.length;
-                if (count % limit === 0)
-                    totalPage = count / limit;
-                else
-                    totalPage = (count / limit) + 1;
-                sr.setSuccessed(true);
-                sr.setResult("ACTIVITY", docs[0]);
-                sr.setResult("LIST_1", result);
-                sr.setNowPage(page);
-                sr.setTotalPage(totalPage);
+        async.waterfall([
+            (callback) => {
+                let sr = new ServiceResult();
+                Activity.findOne({}).limit(1).sort({ "endtime": -1 }).exec(["id", "name", "cover", "summary", "endtime"], (err, result) => {
+                    if (err) {
+                        sr.setSuccessed(false);
+                    } else {
+                        sr.setResult("ACTIVITY", result);
+                    }
+                    callback(err, sr);
+                });
+            },
+            (sr, callback) => {
+                Activity.find({}).skip(start).limit(CONST.ALL_ACTIVITY_LIMIT).exec(["id", "name", "cover", "summary", "endtime"], (err, result) => {
+                    if (err) {
+                        sr.setSuccessed(false);
+                    } else {
+                        let totalPage = 0;
+                        let count = result.length;
+                        if (count % CONST.ALL_ACTIVITY_LIMIT === 0)
+                            totalPage = count / CONST.ALL_ACTIVITY_LIMIT;
+                        else
+                            totalPage = (count / CONST.ALL_ACTIVITY_LIMIT) + 1;
+                        sr.setSuccessed(true);
+                        sr.setResult("LIST_1", result);
+                        sr.setNowPage(page);
+                        sr.setTotalPage(totalPage);
+                    }
+                    callback(err, sr);
+                });
             }
-            callback(sr);
+        ], (err, sr) => {
+            controller_callback(sr);
         });
     },
     queryActivityService: (activity, callback) => {
