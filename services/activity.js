@@ -46,8 +46,46 @@ let activityService = {
         });
     },
     queryActivityService: (activity, callback) => {
-        const {id}=activity;
-        Activity.findOne({id:id}).exec(["name",""])
+        const { id } = activity;
+        Activity.findOne({ id: id }).exec(["name", "content", "status", "money", "fundings"], (err, result) => {
+            if (err) {
+                let sr = new ServiceResult();
+                sr.setSuccessed(false);
+                sr.setErrInfo(err);
+                callback(sr);
+                return;
+            }
+            let fundings = result.fundings;
+            if (fundings.length === 0) {
+                let sr = new ServiceResult();
+                sr.setSuccessed(true);
+                sr.setResult("ACTIVITY", result);
+                sr.setResult("LIST_1", new Array());
+                sr.setResult("DOUBLE", 0);
+                callback(sr);
+                return;
+            }
+            const fundingMoneySum = fundings.reduce((prev, current, index, fundings) => {
+                return prev + current;
+            });
+            const richThreshold = fundingMoneySum * CONST.FUNDING_FACTOR;
+            let richFundings = new Array();
+            let normalFundings = new Array();
+            fundings.forEach((funding, index, fundings) => {
+                if (funding.money > richThreshold) {
+                    richFundings.push(funding);
+                } else {
+                    normalFundings.push(funding);
+                }
+            });
+            richFundings = richFundings.concat(normalFundings);
+            let sr = new ServiceResult();
+            sr.setSuccessed(true);
+            sr.setResult("ACTIVITY", result);
+            sr.setResult("LIST_1", richFundings);
+            sr.setResult("DOUBLE", richThreshold);
+            callback(sr);
+        });
     },
     addActivityService: (coverFile, activity, activityImages, callback) => {
 

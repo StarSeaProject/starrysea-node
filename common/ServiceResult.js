@@ -17,5 +17,8 @@ class ServiceResult {
     setTotalPage(page) {
         this.totalPage = page;
     }
+    setErrInfo(errInfo){
+        this.errInfo=errInfo;
+    }
 }
 module.exports = ServiceResult;

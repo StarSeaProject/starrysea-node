@@ -62,7 +62,7 @@
                 <h3 class="h3 nowacttitle">{{{result.ACTIVITY.name}}}</h3>
                 <br></br> <br></br> <br></br>
                 <p class="p nowactdetail">{{{result.ACTIVITY.summary}}}</p>
-                <br></br> <br></br> <br></br> <a th:href="@{'/activity/'+${newResult.activityId}}" class="a nowactbutton"
+                <br></br> <br></br> <br></br> <a href="/activity/{{{result.ACTIVITY.id}}}" class="a nowactbutton"
                     href="javascript:void(0)">点击打开详情页面</a>
             </div>
             <br/> <br/> <br/>
@@ -78,7 +78,7 @@
     <div class="container pagecontain">
         <div class="activityclass" id="activitys">
             {{#each result.LIST_1}}
-            <div class="actlist text-center" th:each="activity:${result}">
+            <div class="actlist text-center">
                 <div class="actbox row">
                     <div class="col-xs-4 actname">
                         <a>

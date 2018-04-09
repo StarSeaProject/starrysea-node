@@ -12,7 +12,11 @@ activity.post("/ajax", (req, res) => {
 
 });
 activity.get("/:activityId", (req, res) => {
-
+    let activity = new Activity();
+    activity.setActivityId(req.params.activityId);
+    activityService.queryActivityService(activity, (sr) => {
+        res.render("activity_detail", sr);
+    })
 });
 activity.post("/detail/ajax", (req, res) => {
 
