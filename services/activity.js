@@ -42,7 +42,7 @@ let activityService = {
             });
         };
         async.waterfall([getNewestActivityDao, getAllActivityDao], (err, sr) => {
-            controller_callback(sr);
+            controller_callback(err, sr);
         });
     },
     queryActivityService: (activity, callback) => {
@@ -52,7 +52,7 @@ let activityService = {
                 let sr = new ServiceResult();
                 sr.setSuccessed(false);
                 sr.setErrInfo(err);
-                callback(sr);
+                callback(err, sr);
                 return;
             }
             let fundings = result.fundings;
@@ -84,11 +84,11 @@ let activityService = {
             sr.setResult("ACTIVITY", result);
             sr.setResult("LIST_1", richFundings);
             sr.setResult("DOUBLE", richThreshold);
-            callback(sr);
+            callback(err, sr);
         });
     },
     addActivityService: (coverFile, activity, activityImages, callback) => {
-
+        
     },
     modifyActivityService: (activity, callback) => {
 
